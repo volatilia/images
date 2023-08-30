@@ -6,6 +6,9 @@ on:
       - v*.**
 
   workflow_dispatch:
+  
+environment:
+  prefix:  vivlanwong
 
 jobs:
   docker:
@@ -23,6 +26,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - run: docker pull registry.opensource.zalan.do/acid/postgres-operator:v1.10.0
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:v1.10.0 $prefix/postgres-operator:v1.10.0 
       - run: docker images
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
