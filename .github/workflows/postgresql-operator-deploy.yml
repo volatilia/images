@@ -37,8 +37,8 @@ jobs:
       - run: docker push $prefix/zalan_acid_postgres-operator:latest
       
       - run: docker pull registry.opensource.zalan.do/acid/pgbouncer:$pgbouncerr_version
-      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:$pgbouncerr_version $prefix/zalan_acid_pgbouncer:$pgbouncerr_version
-      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:$pgbouncerr_version $prefix/zalan_acid_pgbouncer:latest 
+      - run: docker tag registry.opensource.zalan.do/acid/pgbouncer:$pgbouncerr_version $prefix/zalan_acid_pgbouncer:$pgbouncerr_version
+      - run: docker tag registry.opensource.zalan.do/acid/pgbouncer:$pgbouncerr_version $prefix/zalan_acid_pgbouncer:latest 
       - run: docker push $prefix/zalan_acid_pgbouncer:$pgbouncerr_version
       - run: docker push $prefix/zalan_acid_pgbouncer:latest
       
