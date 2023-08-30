@@ -10,6 +10,7 @@ on:
 env:
   prefix:  vivlanwong
   postgres_operator_version:  v1.10.0
+  postgres_operator_ui_version:  v1.10.0
   pgbouncerr_version:  master-27
   spilo_version: 3.0-p1
   logical_backup: v1.10.0
@@ -53,3 +54,9 @@ jobs:
       - run: docker tag registry.opensource.zalan.do/acid/logical-backup:$logical_backup $prefix/zalando_acid_logical-backup:latest 
       - run: docker push $prefix/zalando_acid_logical-backup:$logical_backup
       - run: docker push $prefix/zalando_acid_logical-backup:latest 
+      
+      - run: docker pull registry.opensource.zalan.do/acid/postgres-operator-ui:$postgres_operator_ui_version
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator-ui:$postgres_operator_ui_version $prefix/zalando_acid_postgres-operator-ui:$postgres_operator_ui_version
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator-ui:$postgres_operator_ui_version $prefix/zalando_acid_postgres-operator-ui:latest 
+      - run: docker push $prefix/zalando_acid_postgres-operator-ui:$postgres_operator_ui_version
+      - run: docker push $prefix/zalando_acid_postgres-operator-ui:latest 
