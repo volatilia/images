@@ -9,6 +9,10 @@ on:
   
 env:
   prefix:  vivlanwong
+  postgres_operator_version:  v1.10.0
+  pgbouncerr_version:  master-27
+  spilo_version: 3.0-p1
+  logical_backup: v1.10.0
 
 jobs:
   docker:
@@ -26,8 +30,26 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: docker pull registry.opensource.zalan.do/acid/postgres-operator:v1.10.0
-      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:v1.10.0 $prefix/postgres-operator:v1.10.0 
-      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:v1.10.0 $prefix/postgres-operator:latest 
-      - run: docker push $prefix/postgres-operator:v1.10.0 
-      - run: docker push $prefix/postgres-operator:latest
+      - run: docker pull registry.opensource.zalan.do/acid/postgres-operator:$postgres_operator_version
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:$postgres_operator_version $prefix/zalan_acid_postgres-operator:$postgres_operator_version
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:$postgres_operator_version $prefix/zalan_acid_postgres-operator:latest 
+      - run: docker push $prefix/zalan_acid_postgres-operator:$postgres_operator_version
+      - run: docker push $prefix/zalan_acid_postgres-operatorr:latest
+      
+      - run: docker pull registry.opensource.zalan.do/acid/pgbouncer:$pgbouncerr_version
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:$pgbouncerr_version $prefix/zalan_acid_pgbouncer:$pgbouncerr_version
+      - run: docker tag registry.opensource.zalan.do/acid/postgres-operator:$pgbouncerr_version $prefix/zalan_acid_pgbouncer:latest 
+      - run: docker push $prefix/zalan_acid_pgbouncer:$pgbouncerr_version
+      - run: docker push $prefix/zalan_acid_pgbouncerr:latest
+      
+      - run: docker pull  ghcr.io/zalando/spilo-15:$spilo_version
+      - run: docker tag ghcr.io/zalando/spilo-15:$spilo_version $prefix/ghcr_zalando_spilo-15:$spilo_version
+      - run: docker tag ghcr.io/zalando/spilo-15:$spilo_version $prefix/ghcr_zalando_spilo-15:latest 
+      - run: docker push $prefix/ghcr_zalando_spilo-15:$spilo_version
+      - run: docker push $prefix/ghcr_zalando_spilo-15:latest 
+
+      - run: docker pull  registry.opensource.zalan.do/acid/logical-backup:$logical_backup
+      - run: docker tag registry.opensource.zalan.do/acid/logical-backup:$logical_backup $prefix/zalando_acid_logical-backup:$logical_backup
+      - run: docker tag registry.opensource.zalan.do/acid/logical-backup:$logical_backup $prefix/zalando_acid_logical-backup:latest 
+      - run: docker push $prefix/zalando_acid_logical-backup:$logical_backup
+      - run: docker push $prefix/zalando_acid_logical-backup:latest 
